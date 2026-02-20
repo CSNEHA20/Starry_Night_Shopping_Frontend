@@ -18,7 +18,6 @@ const nextConfig = {
 
     // Performance optimizations
     experimental: {
-        optimizeCss: true,
         optimizePackageImports: ['three', 'gsap', '@react-three/fiber', '@react-three/drei'],
     },
 
@@ -70,25 +69,6 @@ const nextConfig = {
 
     // Webpack optimizations
     webpack: (config, { dev, isServer }) => {
-        // Optimize Three.js bundle
-        if (!dev && !isServer) {
-            config.optimization.splitChunks = {
-                chunks: 'all',
-                cacheGroups: {
-                    three: {
-                        test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
-                        name: 'three',
-                        priority: 10,
-                    },
-                    gsap: {
-                        test: /[\\/]node_modules[\\/]gsap[\\/]/,
-                        name: 'gsap',
-                        priority: 10,
-                    },
-                },
-            }
-        }
-
         return config
     },
 
